@@ -24,4 +24,4 @@ for (const modelList of ListModels) {
   modelList(sequelize);
 }
 
-module.exports = { sequelize, models };
+module.exports = { sequelize };

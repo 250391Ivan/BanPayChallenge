@@ -1,12 +1,12 @@
 const { DataTypes, Model } = require("sequelize");
 
-odule.exports = (sequelize) => {
+module.exports = (sequelize) => {
   class Client extends Model {
     static associate(models) {
-      models.Client.hasMany(models.Company, {
+      /* models.Client.hasMany(models.Company, {
         as: "CompaniesClient",
-        foreingKey: "IdCompany",
-      });
+        foreingKey: "IdCompany", 
+      });*/
     }
   }
 
