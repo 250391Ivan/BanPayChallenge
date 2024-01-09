@@ -6,6 +6,8 @@ const PORT = process.env.PORT;
 
 //Add  routes for  diferents endpoints
 server.use("/users", require("./routes/users.js"));
+//Add  swagger  for  enpoint
+server.use("/apidocs", require("./helpers/swagger.js"))
 
 const Myserver = server.listen(PORT, () => {
   console.log("----- SERVER RUN -----");
