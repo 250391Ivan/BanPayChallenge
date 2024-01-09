@@ -1,16 +1,13 @@
 //Make  server with Express
-
 const express = require("express");
 const server = express();
 require("dotenv").config();
-
-server.get("/", (req, res) => {
-  res.send("Method  get  for testing");
-});
-
-//server.listen(8085);
 const PORT = process.env.PORT;
+
+//Add  routes for  diferents endpoints
+server.use("/users", require("./routes/users.js"));
+
 const Myserver = server.listen(PORT, () => {
-  console.log("Server  Run ");
-  console.log(`App open  in Port :: ${PORT}`);
+  console.log("----- SERVER RUN -----");
+  console.log(`App open in Port:: ${PORT}`);
 });
