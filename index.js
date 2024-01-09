@@ -4,6 +4,9 @@ const server = express();
 require("dotenv").config();
 const PORT = process.env.PORT;
 
+//Load  Public  html, for mini documentation
+server.use(express.static("public"))
+
 //Add  routes for  diferents endpoints
 server.use("/users", require("./routes/users.js"));
 //Add  swagger  for  enpoint
