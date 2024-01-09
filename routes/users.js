@@ -1,12 +1,8 @@
 const { Router } = require("express");
 const router = Router();
+const { getAllUsers } = require("../controllers/usersController");
 
 //Make routes  for endpoints
-router.get("/", (req, res) => {
-  res.send("Firts  method");
-});
-router.get("/getUsers", (req, res) => {
-  res.send("getUsers");
-});
+router.get("/AllUsers", getAllUsers);
 
 module.exports = router;
