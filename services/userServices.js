@@ -8,8 +8,8 @@ getAllUser = async () => {
   return data;
 };
 Another = async () => {
-  let allInfo = await sequelize.models.Client.findAll();
-  console.log(allInfo);
+  //let allInfo = await sequelize.models.Rol.findAll();
+  let allInfo = await sequelize.models.User.findAll();
   let data = await {
     msn: "Another Information",
     code: 202,
