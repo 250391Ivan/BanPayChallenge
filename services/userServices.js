@@ -1,24 +1,45 @@
 const { sequelize } = require("../database/dbsequelize");
 
-getAllUser = async () => {
-  let data = await {
-    msn: "All  data information on services",
-    code: 202,
-  };
-  return data;
+//Function  for  create  new  user,  validate  if  exist
+CreateUser = async (parms) => {
+  let user = await parms;
+  let exist = await UserRegister(user);
+  if (exist.length > 0) {
+    let msn = "Error user not register, check information";
+    let response = MesaggePetition(msn, exist);
+    return response;
+  } else {
+    parms.Status = 1;
+    let CreateUser = await sequelize.models.User.create(user);
+    let msn = "User create Success";
+    let response = MesaggePetition(msn, CreateUser);
+    return response;
+  }
 };
-Another = async () => {
-  //let allInfo = await sequelize.models.Rol.findAll();
-  let allInfo = await sequelize.models.User.findAll();
-  let data = await {
-    msn: "Another Information",
-    code: 202,
-    data: allInfo,
+// Validate  if  usser  exist  on Db
+UserRegister = async (user) => {
+  let validate = await sequelize.models.User.findAll({
+    where: user,
+  });
+  return validate;
+};
+//Send  information about  de  petition
+MesaggePetition = (msn, data) => {
+  let res = {
+    msn,
+    data,
   };
-  return data;
+  return res;
+};
+
+getAllUser = async () => {
+  let AllInfo = await sequelize.models.User.findAll();
+  let msn = "Get  All Users";
+  let response = MesaggePetition(msn, AllInfo);
+  return response;
 };
 
 module.exports = {
+  CreateUser,
   getAllUser,
-  Another,
 };

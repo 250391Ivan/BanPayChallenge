@@ -1,8 +1,9 @@
 const { Router } = require("express");
 const router = Router();
-const { getAllUsers } = require("../controllers/usersController");
+const { AllUsers, MakeUsers } = require("../controllers/usersController");
 
 //Make routes  for endpoints
-router.get("/AllUsers", getAllUsers);
+router.post("/MakeUser", MakeUsers);
+router.get("/AllUsers", AllUsers);
 
 module.exports = router;
