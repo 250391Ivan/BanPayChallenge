@@ -36,6 +36,7 @@ router.get("/UniqueUser/:id",[validateJWT], OnlyUser);
 router.post(
   "/UpdateUser",
   [
+    validateJWT,
     check("IdUser", "IdUser Is  necesary ").not().isEmpty(),
     check("IdRol", "IdRol Is  necesary ").not().isEmpty(),
     check("FirstName", "FirstName Is  necesary ").not().isEmpty(),
