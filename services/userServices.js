@@ -6,13 +6,13 @@ CreateUser = async (parms) => {
   let user = await parms;
   let exist = await UserRegister(user);
   if (exist.length > 0) {
-    let msn = "Error user not register, check information";
-    let response = MesaggePetition(msn, exist);
+    let msn = "Error, user not registered, check information  and  email";
+    let response = MesaggePetition(msn, 0);
     return response;
   } else {
     parms.Status = 1;
     let CreateUser = await sequelize.models.User.create(user);
-    let msn = "User create Success";
+    let msn = "Sucess for  create User";
     let response = MesaggePetition(msn, CreateUser);
     return response;
   }
@@ -35,9 +35,15 @@ MesaggePetition = (msn, data) => {
 //All users
 getAllUser = async () => {
   let AllInfo = await sequelize.models.User.findAll();
-  let msn = "Get  All Users";
-  let response = MesaggePetition(msn, AllInfo);
-  return response;
+  if (AllInfo[0]) {
+    let msn = "Sucess for  get  all users";
+    let response = MesaggePetition(msn, AllInfo);
+    return response;
+  } else {
+    let msn = "Error for  get  all users, consulting with administraitor";
+    let response = MesaggePetition(msn, AllInfo);
+    return response;
+  }
 };
 
 //GEt  only  id  user  and add  enpoint vercel
@@ -49,57 +55,56 @@ UniqueUserInfo = async (params, res) => {
     },
   });
   // if  not  exist resolve
-  console.log(user[0]);
-  let rol = await user[0].IdRol;
-  let myRolName = await sequelize.models.Rol.findAll({
-    where: {
-      IdRol: rol,
-    },
-    attributes: ["Name"],
-  });
-  let name = myRolName[0].Name;
-  let data = await fetch(`${Endpoint}${name}`).then((response) =>
-    response.json()
-  );
-  user.push(data);
-  if (user.length > 0) {
-    let msn = "User Unique  success";
+  if (user[0]) {
+    console.log(user[0]);
+    let rol = await user[0].IdRol;
+    let myRolName = await sequelize.models.Rol.findAll({
+      where: {
+        IdRol: rol,
+      },
+      attributes: ["Name"],
+    });
+    let name = myRolName[0].Name;
+    let data = await fetch(`${Endpoint}${name}`).then((response) =>
+      response.json()
+    );
+    user.push(data);
+    let msn = "Success with  user data unique, and add Endpoint data";
     let response = MesaggePetition(msn, user);
     return response;
   } else {
-    let msn = "Error id not find";
+    let msn = "Error, Not find Id";
     let response = MesaggePetition(msn, user);
     return response;
   }
 };
 // Function  for  update  user  by  ID
 UpdateUsers = async (params) => {
-    const UniqueUser = await sequelize.models.User.findAll({
-      where: {
-        IdUser: params.IdUser,
+  const UniqueUser = await sequelize.models.User.findAll({
+    where: {
+      IdUser: params.IdUser,
+    },
+    attributes: ["IdUser"],
+  });
+  if (UniqueUser[0]) {
+    let UserId = UniqueUser[0].IdUser;
+    let updateUSer = sequelize.models.User.update(
+      {
+        IdRol: params.IdRol,
+        FirstName: params.FirstName,
+        LastName: params.LastName,
+        Email: params.Email,
       },
-      attributes: ["IdUser"],
-    });
-    if (UniqueUser[0]) {
-      let UserId = UniqueUser[0].IdUser;
-      let updateUSer = sequelize.models.User.update(
-        {
-          IdRol: params.IdRol,
-          FirstName: params.FirstName,
-          LastName: params.LastName,
-          Email: params.Email,
-        },
-        { where: { IdUser: UserId } }
-      );
-      let msn = "User update  success";
-      let response = MesaggePetition(msn, updateUSer);
-      return response;
-    } else {
-      return MesaggePetition("Error with user", 0);
-    }
-  
+      { where: { IdUser: UserId } }
+    );
+    let msn = "Sucess for  update information about id user";
+    let response = MesaggePetition(msn, updateUSer);
+    return response;
+  } else {
+    return MesaggePetition("Error, Not find Id", 0);
+  }
 };
-
+// Service  for  eliminate  user  bi  ID
 EliminateUser = async (params) => {
   let delUser = await sequelize.models.User.destroy({
     where: {
@@ -107,13 +112,13 @@ EliminateUser = async (params) => {
     },
   });
   if (delUser) {
-    let msn = "User has delete success";
+    let msn = "Sucess for eliminate user";
     let response = MesaggePetition(msn, delUser);
     return response;
   } else {
-    let msn = "Error  with user delete";
+    let msn = "Error, Not find Ids not  delete  information";
     let response = MesaggePetition(msn, delUser);
-    return response
+    return response;
   }
 };
 
