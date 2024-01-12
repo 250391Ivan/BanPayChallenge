@@ -22,8 +22,11 @@ dotenv nodemon ./index.js
 
 # In the  html  page  on port 8085, have  a  brief direcctions  an  link for  swagger
 
+# Create token for  ad autorizin  on app myToken
 
 # For  testing  methods  use  postman, with  body  raw  JSON Structure for send  infromation  in a methods.
+
+# Its possible  run dockerfile on po 8085
 
 
 
