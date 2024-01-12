@@ -1,3 +1,4 @@
+//Make routes  for endpoints CRUD
 const { Router } = require("express");
 const router = Router();
 const {
@@ -8,7 +9,6 @@ const {
   DeleteUser,
 } = require("../controllers/usersController");
 
-//Make routes  for endpoints CRUD
 //Create  user
 router.post("/MakeUser", MakeUsers);
 //Read  user
@@ -17,7 +17,7 @@ router.get("/AllUsers", AllUsers);
 router.get("/UniqueUser/:id", OnlyUser);
 //Update  user
 router.post("/UpdateUser", UpdateDatUser);
-//Deelete User
+//Delete User
 router.delete("/CleanUser", DeleteUser);
 
 module.exports = router;

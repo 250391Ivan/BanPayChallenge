@@ -1,3 +1,4 @@
+//Meke  CRUD  for bakend
 const { json } = require("body-parser");
 const {
   getAllUser,
@@ -6,8 +7,6 @@ const {
   UpdateUsers,
   EliminateUser,
 } = require("../services/userServices");
-const { param } = require("../routes/users");
-//Meke  CRUD  for bakend
 
 //Create  new  User
 MakeUsers = (req, res) => {

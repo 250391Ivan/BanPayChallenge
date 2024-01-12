@@ -7,33 +7,100 @@ servers:
   - url: http://localhost:8085/apidocs/#/
     description: Development Enviroment
 paths:
-  /users:
-    get:
-      summary: Returns a list of users.
-      tags:
-        - Users
-      description: Optional extended description in CommonMark or HTML.
-      responses:
-        '200':    # status code
-          description: A JSON array of user names
-          content:
-            application/json:
-              schema: 
-                type: array
-                items: 
-                  type: string
-  /makeUsers:
+  http://localhost:8085/users/MakeUser:
     post:
-      summary: Returns a list of users.
+      summary: Create new user on Database
+      description: Is  necesary fill all  fields for  send  information
       tags:
-        - Users
-      description: Optional extended description in CommonMark or HTML.
-      responses:
-        '200':    # status code
-          description: A JSON array of user names
-          content:
-            application/json:
-              schema: 
-                type: array
-                items: 
+      - User's
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                IdRol:
+                  type: number
+                  example: 1
+                FirstName:
                   type: string
+                  example: "Ivan"
+                LastName:
+                  type: string
+                  example: "Pillado"
+                Email:
+                  type: string
+                  example: "25ivan.pillado@gmail.com"
+              required:
+                - IdRol
+                - FirstName
+                - LastName
+                - Email
+  http://localhost:8085/users/AllUsers:
+    get:
+      summary: Get all users  on Databases
+      description: Recover all infor  for user on Databeses
+      tags:
+      - User's
+  http://localhost:8085/users/UniqueUser/:id:
+    get:
+      summary: Get info for user, and consume endpoint depend of  rol
+      description: Only rol admin, not  have  informatio  on api is unique empty
+      tags:
+      - User's
+  http://localhost:8085/users/UpdateUser:
+    post:
+      summary: Update (IdRol, FirstName,LastName,Email) by  id  user
+      description: This method update fields  about de summary per  id  user
+      tags:
+      - User's
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                IdUser:
+                  type: number
+                  example: 1
+                IdRol:
+                  type: number
+                  example: 1
+                FirstName:
+                  type: string
+                  example: "Ivan Dos"
+                LastName:
+                  type: string
+                  example: "Pillado Dos"
+                Email:
+                  type: string
+                  example: "25ivan.pilladoDos@gmail.com"
+              required:
+                - IdUser
+                - IdRol
+                - FirstName
+                - LastName
+                - Email
+  http://localhost:8085/users/CleanUser:
+    delete:
+      summary: Eliminate  user by id
+      description: Ass status  on Db for not eliminate  user, only change  status paranoic  mode, for  this  excersis delete permantly
+      tags:
+      - User's
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                IdUser:
+                  type: number
+                  example: 1
+              required:
+                - IdUser
+               
+
+  

@@ -8,6 +8,7 @@ const PORT = process.env.PORT;
 
 //Load  Public  html, for mini documentation
 server.use(cors());
+//Serve  html  template  for first  load  page
 server.use(express.static("public"));
 server.use(bodyparser.json());
 server.use(bodyparser.urlencoded({ extended: true }));
@@ -17,6 +18,7 @@ server.use("/users", require("./routes/users.js"));
 //Add  swagger  for  enpoint
 server.use("/apidocs", require("./helpers/swagger.js"))
 
+//Run  server  
 const Myserver = server.listen(PORT, () => {
   console.log("----- SERVER RUN -----");
   console.log(`App open in Port:: ${PORT}`);
