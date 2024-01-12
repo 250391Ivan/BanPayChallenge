@@ -98,9 +98,25 @@ UpdateUsers = async (params) => {
   
 };
 
+EliminateUser = async (params) => {
+  let delUser = await sequelize.models.User.destroy({
+    where: {
+      IdUser: params.IdUser,
+    },
+  });
+  if (delUser) {
+    let msn = "User has delete success";
+    let response = MesaggePetition(msn, delUser);
+  } else {
+    let msn = "Error  with user delete";
+    let response = MesaggePetition(msn, delUser);
+  }
+};
+
 module.exports = {
   CreateUser,
   getAllUser,
   UniqueUserInfo,
   UpdateUsers,
+  EliminateUser,
 };

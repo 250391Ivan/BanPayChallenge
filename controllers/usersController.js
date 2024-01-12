@@ -4,6 +4,7 @@ const {
   CreateUser,
   UniqueUserInfo,
   UpdateUsers,
+  EliminateUser,
 } = require("../services/userServices");
 const { param } = require("../routes/users");
 //Meke  CRUD  for bakend
@@ -29,10 +30,18 @@ OnlyUser = (req, res) => {
     res.json(OnlyUser);
   });
 };
-
+//Updte  data User
 UpdateDatUser = (req, res) => {
   let user = req.body;
   let changeData = UpdateUsers(user).then((user) => {
+    res.json(user);
+  });
+};
+
+//Delete user  by id
+DeleteUser = (req, res) => {
+  let user = req.body;
+  let deleteUser = EliminateUser(user).then((user) => {
     res.json(user);
   });
 };
@@ -42,4 +51,5 @@ module.exports = {
   MakeUsers,
   OnlyUser,
   UpdateDatUser,
+  DeleteUser,
 };
