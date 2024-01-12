@@ -12,13 +12,13 @@ npm i
 Its  necesary  create  this  DB  banpay
 
 ### Run  migrations  for  create model  of  tables use  this comand o run in package.json
-dotenv npx sequelize-cli db:migrate
+npm run  migrate:up  
 
 ### After  to run migrations,  run seeder  withs  this  command
-dotenv npx sequelize-cli db:seed:all
+npm run seed:all
 
 ### After  ro  run migrations  and  seeders, run this  commnad
-dotenv nodemon ./index.js
+npm run start
 
 ### In the  html  page  on port 8085, have  a  brief direcctions  an  link for  swagger
 
