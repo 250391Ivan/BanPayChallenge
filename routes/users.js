@@ -18,6 +18,6 @@ router.get("/UniqueUser/:id", OnlyUser);
 //Update  user
 router.post("/UpdateUser", UpdateDatUser);
 //Deelete User
-router.post("/CleanUser", DeleteUser);
+router.delete("/CleanUser", DeleteUser);
 
 module.exports = router;
