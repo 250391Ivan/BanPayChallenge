@@ -48,6 +48,8 @@ UniqueUserInfo = async (params, res) => {
       IdUser: id,
     },
   });
+  // if  not  exist resolve
+  console.log(user[0]);
   let rol = await user[0].IdRol;
   let myRolName = await sequelize.models.Rol.findAll({
     where: {
@@ -107,9 +109,11 @@ EliminateUser = async (params) => {
   if (delUser) {
     let msn = "User has delete success";
     let response = MesaggePetition(msn, delUser);
+    return response;
   } else {
     let msn = "Error  with user delete";
     let response = MesaggePetition(msn, delUser);
+    return response
   }
 };
 
