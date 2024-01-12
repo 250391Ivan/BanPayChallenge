@@ -1,12 +1,19 @@
 openapi: 3.0.0
 info:
   title: CRUD for BanPay
-  description: Documentation for  methods BanPay Remember make banpay Database, run npm i and  run migrations  and  seders
+  description: Documentation for  methods BanPay Remember make banpay Database, run npm i and  run migrations  and  seeders, put on headers myToken and  add token
   version: 0.1.9
 servers:
   - url: http://localhost:8085/apidocs/#/
     description: Development Enviroment
 paths:
+  http://localhost:8085/users/Token:
+    get:
+      summary: Use  this  method  for  make JWt  for  all petition
+      description: Create token secret and library
+      tags:
+      - JWT
+      
   http://localhost:8085/users/MakeUser:
     post:
       summary: Create new user on Database
@@ -22,7 +29,7 @@ paths:
               properties:
                 IdRol:
                   type: number
-                  example: 1
+                  example: 4
                 FirstName:
                   type: string
                   example: "Ivan"

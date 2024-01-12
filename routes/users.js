@@ -13,12 +13,13 @@ const {
 } = require("../controllers/usersController");
 const { validateJWT } = require("../middleware/validatejwt");
 
-//Make  token
-router.get("/Toeken", CreateToken);
+//Make  token  fot  py on  headers  petition
+router.get("/Token", CreateToken);
 //Create  user
 router.post(
   "/MakeUser",
   [
+    validateJWT,
     check("Email", "Email is  mandatory").isEmail(),
     check("IdRol", "IdRol Is  necesary ").not().isEmpty(),
     check("FirstName", "FirstName Is  necesary ").not().isEmpty(),
@@ -30,7 +31,7 @@ router.post(
 //Read  user
 router.get("/AllUsers", [validateJWT], AllUsers);
 //Read  specific  User
-router.get("/UniqueUser/:id", OnlyUser);
+router.get("/UniqueUser/:id",[validateJWT], OnlyUser);
 //Update  user
 router.post(
   "/UpdateUser",
@@ -45,6 +46,6 @@ router.post(
   UpdateDatUser
 );
 //Delete User
-router.delete("/CleanUser", DeleteUser);
+router.delete("/CleanUser",[validateJWT], DeleteUser);
 
 module.exports = router;
