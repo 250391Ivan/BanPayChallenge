@@ -70,9 +70,37 @@ UniqueUserInfo = async (params, res) => {
     return response;
   }
 };
+// Function  for  update  user  by  ID
+UpdateUsers = async (params) => {
+    const UniqueUser = await sequelize.models.User.findAll({
+      where: {
+        IdUser: params.IdUser,
+      },
+      attributes: ["IdUser"],
+    });
+    if (UniqueUser[0]) {
+      let UserId = UniqueUser[0].IdUser;
+      let updateUSer = sequelize.models.User.update(
+        {
+          IdRol: params.IdRol,
+          FirstName: params.FirstName,
+          LastName: params.LastName,
+          Email: params.Email,
+        },
+        { where: { IdUser: UserId } }
+      );
+      let msn = "User update  success";
+      let response = MesaggePetition(msn, updateUSer);
+      return response;
+    } else {
+      return MesaggePetition("Error with user", 0);
+    }
+  
+};
 
 module.exports = {
   CreateUser,
   getAllUser,
   UniqueUserInfo,
+  UpdateUsers,
 };

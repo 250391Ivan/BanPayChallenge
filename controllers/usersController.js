@@ -3,7 +3,9 @@ const {
   getAllUser,
   CreateUser,
   UniqueUserInfo,
+  UpdateUsers,
 } = require("../services/userServices");
+const { param } = require("../routes/users");
 //Meke  CRUD  for bakend
 
 //Create  new  User
@@ -23,9 +25,15 @@ AllUsers = (req, res) => {
 
 //Get  infor  for  unique  user and add infor  enpoint
 OnlyUser = (req, res) => {
-  console.log(req.params);
   let InfoUser = UniqueUserInfo(req.params).then((OnlyUser) => {
     res.json(OnlyUser);
+  });
+};
+
+UpdateDatUser = (req, res) => {
+  let user = req.body;
+  let changeData = UpdateUsers(user).then((user) => {
+    res.json(user);
   });
 };
 
@@ -33,4 +41,5 @@ module.exports = {
   AllUsers,
   MakeUsers,
   OnlyUser,
+  UpdateDatUser,
 };
