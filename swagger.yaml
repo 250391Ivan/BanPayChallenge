@@ -45,7 +45,7 @@ paths:
       - User's
   http://localhost:8085/users/UniqueUser/:id:
     get:
-      summary: Get info for user, and consume endpoint depend of  rol
+      summary: Get info for user, and consume endpoint depend of  rol (Add id  number on url)
       description: Only rol admin, not  have  informatio  on api is unique empty
       tags:
       - User's
