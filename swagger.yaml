@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: CRUD for BanPay
-  description: Documentation for  methods BanPay
+  description: Documentation for  methods BanPay Remember make banpay Database, run npm i and  run migrations  and  seders
   version: 0.1.9
 servers:
   - url: http://localhost:8085/apidocs/#/
