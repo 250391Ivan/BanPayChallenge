@@ -1,4 +1,5 @@
-const { sequelize } = require("../database/dbsequelize");
+const { sequelize, models } = require("../database/dbsequelize");
+const Endpoint = process.env.ENDPOINT;
 
 //Function  for  create  new  user,  validate  if  exist
 CreateUser = async (parms) => {
@@ -31,7 +32,7 @@ MesaggePetition = (msn, data) => {
   };
   return res;
 };
-
+//All users
 getAllUser = async () => {
   let AllInfo = await sequelize.models.User.findAll();
   let msn = "Get  All Users";
@@ -39,7 +40,39 @@ getAllUser = async () => {
   return response;
 };
 
+//GEt  only  id  user  and add  enpoint vercel
+UniqueUserInfo = async (params, res) => {
+  let id = params.id;
+  let user = await sequelize.models.User.findAll({
+    where: {
+      IdUser: id,
+    },
+  });
+  let rol = await user[0].IdRol;
+  let myRolName = await sequelize.models.Rol.findAll({
+    where: {
+      IdRol: rol,
+    },
+    attributes: ["Name"],
+  });
+  let name = myRolName[0].Name;
+  let data = await fetch(`${Endpoint}${name}`).then((response) =>
+    response.json()
+  );
+  user.push(data);
+  if (user.length > 0) {
+    let msn = "User Unique  success";
+    let response = MesaggePetition(msn, user);
+    return response;
+  } else {
+    let msn = "Error id not find";
+    let response = MesaggePetition(msn, user);
+    return response;
+  }
+};
+
 module.exports = {
   CreateUser,
   getAllUser,
+  UniqueUserInfo,
 };

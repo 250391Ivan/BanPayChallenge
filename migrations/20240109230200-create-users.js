@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      Rol: {
+      IdRol: {
         type: Sequelize.INTEGER,
         references: { model: "Roles", key: "IdRol" },
       },

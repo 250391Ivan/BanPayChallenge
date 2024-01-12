@@ -23,6 +23,7 @@ const ListModels = [
   require("../models/users.js"),
 ];
 
+
 for (const modelList of ListModels) {
   modelList(sequelize);
 }

@@ -1,12 +1,7 @@
 const { DataTypes, Model } = require("sequelize");
 module.exports = (sequelize) => {
   class Users extends Model {
-    static associate(models) {
-      models.User.hasMany(models.Role, {
-        as: "RoleUser",
-        foreinhkey: "Id",
-      });
-    }
+    static associate(models) {}
   }
   Users.init(
     {
@@ -16,7 +11,7 @@ module.exports = (sequelize) => {
         autoIncrement: true,
         allowNull: false,
       },
-      Rol: { type: DataTypes.INTEGER },
+      IdRol: { type: DataTypes.INTEGER },
       FirstName: { type: DataTypes.STRING },
       LastName: { type: DataTypes.STRING },
       Email: { type: DataTypes.STRING },
