@@ -9,8 +9,12 @@ const {
   OnlyUser,
   UpdateDatUser,
   DeleteUser,
+  CreateToken,
 } = require("../controllers/usersController");
+const { validateJWT } = require("../middleware/validatejwt");
 
+//Make  token
+router.get("/Toeken", CreateToken);
 //Create  user
 router.post(
   "/MakeUser",
@@ -24,7 +28,7 @@ router.post(
   MakeUsers
 );
 //Read  user
-router.get("/AllUsers", AllUsers);
+router.get("/AllUsers", [validateJWT], AllUsers);
 //Read  specific  User
 router.get("/UniqueUser/:id", OnlyUser);
 //Update  user

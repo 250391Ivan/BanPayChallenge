@@ -7,6 +7,7 @@ const {
   UpdateUsers,
   EliminateUser,
 } = require("../services/userServices");
+const { makeJWT } = require("../helpers/jwt");
 
 //Create  new  User
 MakeUsers = (req, res) => {
@@ -45,10 +46,22 @@ DeleteUser = (req, res) => {
   });
 };
 
+//CreateToken
+
+CreateToken = async (req, res) => {
+  let myTkn = await makeJWT();
+  let response = {
+    msn: "Its  is  token",
+    tkn: myTkn,
+  };
+  res.json(response);
+};
+
 module.exports = {
   AllUsers,
   MakeUsers,
   OnlyUser,
   UpdateDatUser,
   DeleteUser,
+  CreateToken,
 };
